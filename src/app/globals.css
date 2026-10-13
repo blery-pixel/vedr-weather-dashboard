@@ -1,0 +1,405 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ===================== Norse-Bold display font ===================== */
+/* Joel Carrouche's Norse-Bold — a runic/viking display face used for all
+ * titles + symbols across the dashboard. font-display: block avoids a flash
+ * of fallback (unstyled) text on reload. */
+@font-face {
+  font-family: 'Norse';
+  src: url('/fonts/NorseBold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-norse: 'Norse', 'Geist', serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  /* Old Norse / Viking palette — token aliases used across components */
+  --color-scot-green: #78917D;        /* Moss Green — nature / clear weather */
+  --color-scot-loch: #7899AB;        /* Fjord Blue — rain / snow / data / links */
+  --color-scot-amber: #B87943;       /* Ember Bronze — sun / warm accents */
+  --color-scot-amber-glow: #D5C5A1;  /* Ancient Parchment — primary accent */
+  --color-scot-heather: #6B7F8B;     /* Slate Heather — secondary accent */
+  --color-scot-midnight: #101B22;    /* Midnight Fjord — background */
+  --color-scot-peat: #1B2B35;        /* Dark Nordic Slate — cards */
+  --color-scot-loch-light: #233844;  /* Storm Slate — secondary surfaces */
+  --color-scot-highland-dark: #1B2B35;
+}
+
+/* ===================== LIGHT MODE — Fjord Mist (paler) ===================== */
+:root {
+  --radius: 0.875rem;
+  --background: #E8E4D8;              /* pale parchment mist */
+  --foreground: #2A3B44;              /* dark slate text */
+  --card: #F3F0E8;                   /* soft ivory card */
+  --card-foreground: #2A3B44;
+  --popover: #F3F0E8;
+  --popover-foreground: #2A3B44;
+  --primary: #B87943;                /* Ember Bronze primary in light */
+  --primary-foreground: #F3F0E8;
+  --secondary: #D9D2C2;
+  --secondary-foreground: #2A3B44;
+  --muted: #D9D2C2;
+  --muted-foreground: #475461;       /* Mist Grey — darkened from #6B7F8B for WCAG AA contrast (≥4.5:1 on light card) */
+  --accent: #7899AB;                 /* Fjord Blue accent in light */
+  --accent-foreground: #F3F0E8;
+  --destructive: #B85450;
+  --border: rgba(42, 59, 68, 0.14);
+  --input: rgba(42, 59, 68, 0.18);
+  --ring: #B87943;
+  --chart-1: #B87943;   /* Ember Bronze */
+  --chart-2: #7899AB;  /* Fjord Blue */
+  --chart-3: #78917D;  /* Moss Green */
+  --chart-4: #D5C5A1;  /* Ancient Parchment */
+  --chart-5: #6B7F8B;  /* Slate Heather */
+  --sidebar: #F3F0E8;
+  --sidebar-foreground: #2A3B44;
+  --sidebar-primary: #B87943;
+  --sidebar-primary-foreground: #F3F0E8;
+  --sidebar-accent: #D9D2C2;
+  --sidebar-accent-foreground: #2A3B44;
+  --sidebar-border: rgba(42, 59, 68, 0.14);
+  --sidebar-ring: #B87943;
+}
+
+/* ===================== DARK MODE — Midnight Fjord (primary) ===================== */
+.dark {
+  --background: #101B22;             /* Midnight Fjord */
+  --foreground: #F3F0E8;             /* Soft Ivory */
+  --card: #1B2B35;                   /* Dark Nordic Slate */
+  --card-foreground: #F3F0E8;
+  --popover: #1B2B35;
+  --popover-foreground: #F3F0E8;
+  --primary: #D5C5A1;                /* Ancient Parchment — main accent */
+  --primary-foreground: #101B22;
+  --secondary: #233844;              /* Storm Slate */
+  --secondary-foreground: #F3F0E8;
+  --muted: #2A4050;                 /* Storm Slate (slightly brighter for contrast) */
+  --muted-foreground: #C3D2DA;      /* brightened Mist Grey for readability */
+  --accent: #B87943;                 /* Ember Bronze */
+  --accent-foreground: #F3F0E8;
+  --destructive: #B85450;            /* red for severe alerts */
+  --border: rgba(170, 187, 194, 0.12); /* thin Mist Grey borders */
+  --input: rgba(170, 187, 194, 0.16);
+  --ring: #D5C5A1;                   /* Parchment focus ring */
+  --chart-1: #B87943;   /* Ember Bronze — temperature */
+  --chart-2: #7899AB;   /* Fjord Blue — humidity/rain */
+  --chart-3: #78917D;   /* Moss Green — clear/fair */
+  --chart-4: #D5C5A1;   /* Ancient Parchment — highlight */
+  --chart-5: #6B7F8B;   /* Slate Heather — secondary */
+  --sidebar: #101B22;
+  --sidebar-foreground: #F3F0E8;
+  --sidebar-primary: #D5C5A1;
+  --sidebar-primary-foreground: #101B22;
+  --sidebar-accent: #233844;
+  --sidebar-accent-foreground: #F3F0E8;
+  --sidebar-border: rgba(170, 187, 194, 0.12);
+  --sidebar-ring: #D5C5A1;
+}
+
+/* Larger root font-size so words + numbers are clearly readable (overrides
+ * the browser/Tailwind default of 16px). */
+:root {
+  font-size: 17px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  /* Slightly larger root font-size so words + numbers are clearly readable. */
+  html {
+    font-size: 17px;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  /* All titles + symbols use the Joel Carrouche Norse-Bold display face. */
+  h1, h2, h3, h4, h5, h6,
+  .card-label,
+  .font-norse {
+    font-family: var(--font-norse), 'Geist', serif;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  /* Focus-visible for full keyboard navigation */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+    border-radius: 4px;
+  }
+}
+
+/* Utility — apply the Norse display face to any element (symbols, big
+ * readouts, compass letters, kbd chips, brand wordmark). */
+.font-norse {
+  font-family: var(--font-norse), 'Geist', serif;
+  font-weight: 700;
+}
+
+/* Text-only clickable word (no button cadre) — used for the hourly rail
+ * scroll controls + similar inline actions. */
+.text-click {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-norse), 'Geist', serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: color-mix(in oklch, var(--foreground) 55%, transparent);
+  transition: color 0.15s ease;
+}
+.text-click:hover {
+  color: var(--color-scot-amber);
+}
+.text-click:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* ===================== Tartan grid background ===================== */
+.tartan-grid {
+  background-image:
+    /* horizontal lines - subtle */
+    linear-gradient(to bottom, transparent 0, transparent calc(100% - 1px), color-mix(in oklch, var(--foreground) 8%, transparent) 100%),
+    linear-gradient(to bottom, transparent 0, transparent calc(50% - 1px), color-mix(in oklch, var(--foreground) 5%, transparent) 100%),
+    /* vertical lines */
+    linear-gradient(to right, transparent 0, transparent calc(100% - 1px), color-mix(in oklch, var(--foreground) 8%, transparent) 100%),
+    linear-gradient(to right, transparent 0, transparent calc(50% - 1px), color-mix(in oklch, var(--foreground) 5%, transparent) 100%);
+  background-size:
+    100% 28px,
+    100% 14px,
+    28px 100%,
+    14px 100%;
+  background-position:
+    0 0,
+    0 0,
+    0 0,
+    0 0;
+}
+
+/* Tartan plaid — coloured woven pattern overlay */
+.tartan-plaid {
+  background-color: transparent;
+  background-image:
+    repeating-linear-gradient(0deg,
+      transparent 0,
+      transparent 6px,
+      color-mix(in oklch, var(--color-scot-green, #1C3125) 14%, transparent) 6px,
+      color-mix(in oklch, var(--color-scot-green, #1C3125) 14%, transparent) 8px,
+      transparent 8px,
+      transparent 24px,
+      color-mix(in oklch, var(--color-scot-amber, #E68A2E) 10%, transparent) 24px,
+      color-mix(in oklch, var(--color-scot-amber, #E68A2E) 10%, transparent) 26px,
+      transparent 26px,
+      transparent 56px
+    ),
+    repeating-linear-gradient(90deg,
+      transparent 0,
+      transparent 6px,
+      color-mix(in oklch, var(--color-scot-heather, #6B4E5B) 12%, transparent) 6px,
+      color-mix(in oklch, var(--color-scot-heather, #6B4E5B) 12%, transparent) 8px,
+      transparent 8px,
+      transparent 24px,
+      color-mix(in oklch, var(--color-scot-amber, #E68A2E) 10%, transparent) 24px,
+      color-mix(in oklch, var(--color-scot-amber, #E68A2E) 10%, transparent) 26px,
+      transparent 26px,
+      transparent 56px
+    );
+  background-size: 56px 56px, 56px 56px;
+  opacity: 0.4;
+}
+
+/* ===================== Glassmorphic card ===================== */
+.glass-card {
+  background: color-mix(in oklch, var(--card) 70%, transparent);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid color-mix(in oklch, var(--foreground) 10%, transparent);
+  box-shadow:
+    0 1px 0 0 color-mix(in oklch, white 30%, transparent) inset,
+    0 8px 32px -12px color-mix(in oklch, var(--background) 80%, transparent);
+}
+.dark .glass-card {
+  background: color-mix(in oklch, var(--card) 55%, transparent);
+  border: 1px solid color-mix(in oklch, white 8%, transparent);
+  box-shadow:
+    0 1px 0 0 color-mix(in oklch, white 8%, transparent) inset,
+    0 8px 32px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* ===================== Solid panel (opaque) =====================
+   Used for sheets/dialogs where content must remain fully readable
+   (no see-through over a busy dashboard background). Earlier the
+   settings sheet + hamburger menu used `glass-card` (55-70% transparent)
+   + `bg-card/30` buttons, stacking transparency so buttons were
+   nearly invisible. `solid-panel` gives a fully opaque background
+   + subtle shadow + border for depth. */
+.solid-panel {
+  background: var(--background);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow:
+    0 0 0 1px var(--border),
+    0 20px 50px -12px rgba(0, 0, 0, 0.45);
+}
+.dark .solid-panel {
+  background: var(--background);
+  box-shadow:
+    0 0 0 1px var(--border),
+    0 20px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* Subtle inner glow ring used on hero */
+.amber-glow {
+  box-shadow:
+    0 0 0 1px color-mix(in oklch, var(--color-scot-amber) 30%, transparent),
+    0 0 40px -8px color-mix(in oklch, var(--color-scot-amber) 35%, transparent);
+}
+
+/* ===================== Custom scrollbar ===================== */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in oklch, var(--foreground) 25%, transparent) transparent;
+}
+.scroll-thin::-webkit-scrollbar { height: 8px; width: 8px; }
+.scroll-thin::-webkit-scrollbar-track { background: transparent; }
+.scroll-thin::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--foreground) 22%, transparent);
+  border-radius: 8px;
+}
+.scroll-thin::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--color-scot-amber) 60%, transparent);
+}
+
+/* ===================== Mist animation ===================== */
+@keyframes mist-drift {
+  0% { transform: translateX(-10%) translateY(0); opacity: 0.25; }
+  50% { transform: translateX(10%) translateY(-4px); opacity: 0.4; }
+  100% { transform: translateX(-10%) translateY(0); opacity: 0.25; }
+}
+.mist-layer {
+  animation: mist-drift 18s ease-in-out infinite;
+}
+
+@keyframes pulse-amber {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+.pulse-amber { animation: pulse-amber 3s ease-in-out infinite; }
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+.spin-slow { animation: spin-slow 14s linear infinite; }
+
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+.float-soft { animation: float-soft 5s ease-in-out infinite; }
+
+@keyframes rain-fall {
+  0% { transform: translateY(-120%); opacity: 0; }
+  10% { opacity: 0.7; }
+  100% { transform: translateY(120%); opacity: 0; }
+}
+
+/* Fade/slide in entrance */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/* Reduced motion — covers both custom keyframe animations AND the
+tw-animate-css utilities used by Radix primitives (Sheet / Dialog /
+Popover / Tooltip slide-in + fade). Disabling all motion for users
+who request it (WCAG 2.1 SC 2.3.3). */
+@media (prefers-reduced-motion: reduce) {
+  .mist-layer, .pulse-amber, .spin-slow, .float-soft, .fade-up {
+    animation: none !important;
+  }
+  /* Radix / tw-animate-css entrance animations — Sheet, Dialog, Popover, Tooltip, etc. */
+  [class*="animate-in"], [class*="animate-out"],
+  [data-state="open"], [data-state="closed"],
+  .fade-in, .fade-out, .slide-in-from-right, .slide-in-from-left,
+  .slide-in-from-top, .slide-in-from-bottom, .zoom-in, .zoom-out {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ===================== Custom static cursor (universal) ====================
+   A single 32×32 PNG frame (`default-frame2.png`, decoded from the
+   user-provided base64 — the FULL cursor frame from the "Spellforce 3:
+   Fallen God" cursor set on rw-designer.com). Applied UNIVERSALLY with
+   `*` + `!important` so the custom cursor shows on EVERY element — body,
+   buttons, links, inputs, draggable letters, disabled controls —
+   with NO contextual changes (the user explicitly asked "dont let em
+   change" / complained the cursor changed to the normal OS cursor on
+   buttons).
+
+   WHY FRAME 2: frame 1 of the animation has only 30 opaque pixels (a
+   tiny 9×5 icon — nearly invisible). Frame 2 has 583 opaque pixels
+   filling the full 32×30 canvas — the complete cursor image. Using
+   frame 2 gives a clearly visible cursor.
+
+   STATIC (no animation): the earlier @keyframes approach alternated
+   between the two PNG frames at 3Hz (0.333s/cycle), which the user
+   described as "singing like strobe, not stable". A single static
+   frame is stable + comfortable + cross-platform (PNG cursors work
+   everywhere, unlike Windows-only .ani files). */
+* {
+  cursor: url('/cursors/default-frame2.png') 0 0, auto !important;
+}
+
+/* Touch devices: no cursor at all. */
+@media (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+}
